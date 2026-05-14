@@ -1,0 +1,50 @@
+name: Update Cask
+
+on:
+  workflow_dispatch:
+    inputs:
+      cask:
+        description: "Cask name"
+        required: true
+        default: "codex-profile-switcher"
+      tag:
+        description: "Release tag (e.g. v0.2.0)"
+        required: true
+      repository:
+        description: "Source GitHub repo"
+        required: true
+        default: "4LAU/codex-profile-switcher"
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update cask
+        env:
+          CASK_NAME: ${{ inputs.cask }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          SOURCE_REPO: ${{ inputs.repository }}
+        run: |
+          python3 .github/scripts/update_cask.py \
+            --cask "$CASK_NAME" \
+            --tag "$RELEASE_TAG" \
+            --repository "$SOURCE_REPO"
+
+      - name: Commit and push
+        env:
+          CASK_NAME: ${{ inputs.cask }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          if [[ "$(cat CASK_UPDATED)" != "true" ]]; then
+            echo "No changes needed."
+            exit 0
+          fi
+          rm -f CASK_UPDATED
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "Casks/$CASK_NAME.rb"
+          git commit -m "$CASK_NAME: update to $RELEASE_TAG"
+          git push
