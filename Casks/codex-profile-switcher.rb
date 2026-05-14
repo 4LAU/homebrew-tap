@@ -1,8 +1,8 @@
 cask "codex-profile-switcher" do
-  version "0.1.1"
-  sha256 "26e6dc06009f209422758fc119ab78455eff45d3429615b7b440e5daf7afd8ea"
+  version "0.1.2"
+  sha256 "0bbb54a9d15d101ae2378c81c5aae751f1ed8ed607ef72d60d8d6f4c7e81e651"
 
-  url "https://github.com/4LAU/codex-profile-switcher/releases/download/v0.1.1/CodexProfileSwitcher-#{version}.dmg"
+  url "https://github.com/4LAU/codex-profile-switcher/releases/download/v0.1.2/CodexProfileSwitcher-#{version}.dmg"
   name "Codex Profile Switcher"
   desc "Switch OpenAI Codex accounts from the macOS menu bar"
   homepage "https://github.com/4LAU/codex-profile-switcher"
