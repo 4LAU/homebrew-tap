@@ -1,4 +1,5 @@
 name: Update Cask
+run-name: Update ${{ inputs.cask }} for ${{ inputs.tag }}${{ inputs.request_id && format(' ({0})', inputs.request_id) || '' }}
 
 on:
   workflow_dispatch:
@@ -6,19 +7,44 @@ on:
       cask:
         description: "Cask name"
         required: true
+        type: string
         default: "codex-profile-switcher"
       tag:
         description: "Release tag (e.g. v0.2.0)"
         required: true
+        type: string
       repository:
         description: "Source GitHub repo"
         required: true
+        type: string
         default: "4LAU/codex-profile-switcher"
+      artifact:
+        description: "Release asset filename"
+        required: false
+        type: string
+      request_id:
+        description: "Unique caller-generated ID used to identify this workflow run"
+        required: false
+        type: string
+
+permissions:
+  contents: write
 
 jobs:
   update:
     runs-on: macos-latest
     steps:
+      - name: Validate dispatch inputs
+        run: |
+          if [ "${{ inputs.cask }}" != "codex-profile-switcher" ]; then
+            echo "::error::Unsupported cask: ${{ inputs.cask }}"
+            exit 1
+          fi
+          if [ "${{ inputs.repository }}" != "4LAU/codex-profile-switcher" ]; then
+            echo "::error::Unsupported repository: ${{ inputs.repository }}"
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
 
       - name: Update cask
@@ -26,11 +52,20 @@ jobs:
           CASK_NAME: ${{ inputs.cask }}
           RELEASE_TAG: ${{ inputs.tag }}
           SOURCE_REPO: ${{ inputs.repository }}
+          ARTIFACT: ${{ inputs.artifact }}
         run: |
-          python3 .github/scripts/update_cask.py \
+          set -euo pipefail
+
+          args=(
             --cask "$CASK_NAME" \
             --tag "$RELEASE_TAG" \
             --repository "$SOURCE_REPO"
+          )
+          if [ -n "$ARTIFACT" ]; then
+            args+=(--artifact "$ARTIFACT")
+          fi
+
+          python3 .github/scripts/update_cask.py "${args[@]}"
 
       - name: Commit and push
         env:
@@ -44,7 +79,7 @@ jobs:
           fi
           rm -f CASK_UPDATED
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "Casks/$CASK_NAME.rb"
           git commit -m "$CASK_NAME: update to $RELEASE_TAG"
           git push
