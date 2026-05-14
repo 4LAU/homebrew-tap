@@ -1,17 +1,17 @@
+# frozen_string_literal: true
+
 class Apisniff < Formula
   include Language::Python::Virtualenv
 
-  desc "One tool for API recon: preflight defenses, capture real traffic, extract a usable spec"
+  desc "API recon: preflight defenses, traffic capture, and spec extraction"
   homepage "https://github.com/4LAU/apisniff"
-  url "https://files.pythonhosted.org/packages/de/e9/ad4972e3ce024a8682c0a1a7581bffb4486e948f1f2ca9c190769d9598c2/apisniff-0.1.0.tar.gz"
-  sha256 "20aa682f27dec50b7fce6d9ba78f2d0cfcabc06bd4c44790eac35a4976737779"
+  url "https://files.pythonhosted.org/packages/a0/94/50d69c29c647cffe26777e6500c8857e98cbddd11ce4fa4a1df147a797f1/apisniff-0.1.1.tar.gz"
+  sha256 "85638b2cec613c9c50405e99fcee9c5e41fd4c55ff5b3d461f6a19a47d38914d"
   license "MIT"
 
-  depends_on "python@3.12"
+  depends_on "pkgconf" => :build
   depends_on "rust" => :build
-  depends_on "openssl@3"
-  depends_on "libffi"
-  depends_on "curl"
+  depends_on "python@3.13"
 
   resource "aioquic" do
     url "https://files.pythonhosted.org/packages/4b/1a/bf10b2c57c06c7452b685368cb1ac90565a6e686e84ec6f84465fb8f78f4/aioquic-1.2.0.tar.gz"
@@ -244,8 +244,8 @@ class Apisniff < Formula
   end
 
   resource "requests" do
-    url "https://files.pythonhosted.org/packages/24/36/7180e7f077c38108945dbbdf60fe04db681c3feb6e96419f8c6dc8723741/requests-2.34.1.tar.gz"
-    sha256 "0fc5669f2b69704449fe1552360bd2a73a54512dfd03e65529157f1513322beb"
+    url "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz"
+    sha256 "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"
   end
 
   resource "requests-file" do
@@ -324,7 +324,7 @@ class Apisniff < Formula
   end
 
   def install
-    virtualenv_install_with_resources
+    virtualenv_install_with_resources(using: "python@3.13")
   end
 
   test do
