@@ -28,6 +28,17 @@ jobs:
   update-formula:
     runs-on: ubuntu-latest
     steps:
+      - name: Validate dispatch inputs
+        run: |
+          if [ "${{ inputs.formula }}" != "apisniff" ]; then
+            echo "::error::Unsupported formula: ${{ inputs.formula }}"
+            exit 1
+          fi
+          if [ "${{ inputs.repository }}" != "4LAU/apisniff" ]; then
+            echo "::error::Unsupported repository: ${{ inputs.repository }}"
+            exit 1
+          fi
+
       - name: Checkout tap repository
         uses: actions/checkout@v4
 
