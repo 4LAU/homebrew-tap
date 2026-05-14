@@ -5,8 +5,8 @@ class Apisniff < Formula
 
   desc "API recon: preflight defenses, traffic capture, and spec extraction"
   homepage "https://github.com/4LAU/apisniff"
-  url "https://files.pythonhosted.org/packages/a0/94/50d69c29c647cffe26777e6500c8857e98cbddd11ce4fa4a1df147a797f1/apisniff-0.1.1.tar.gz"
-  sha256 "85638b2cec613c9c50405e99fcee9c5e41fd4c55ff5b3d461f6a19a47d38914d"
+  url "https://files.pythonhosted.org/packages/43/c8/29559ce8907b966d1557f0390e13a03c86c67775ede879d0c1f25e707b22/apisniff-0.1.2.tar.gz"
+  sha256 "bba4dd0f94eb49e135973856339ceb7f59416609876b6d1af23b91a51cddfb24"
   license "MIT"
 
   depends_on "pkgconf" => :build
