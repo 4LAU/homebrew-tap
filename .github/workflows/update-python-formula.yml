@@ -1,0 +1,73 @@
+name: Update Python Formula
+run-name: Update ${{ inputs.formula }} for ${{ inputs.tag }}${{ inputs.request_id && format(' ({0})', inputs.request_id) || '' }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      formula:
+        description: "Formula name"
+        required: true
+        type: string
+      tag:
+        description: "Source release tag, e.g. v0.1.0"
+        required: true
+        type: string
+      repository:
+        description: "Source GitHub repo, e.g. 4LAU/apisniff"
+        required: true
+        type: string
+      request_id:
+        description: "Unique caller-generated ID used to identify this workflow run"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update-formula:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tap repository
+        uses: actions/checkout@v4
+
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.tag }}
+          path: source
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Update formula
+        env:
+          FORMULA: ${{ inputs.formula }}
+          TAG_NAME: ${{ inputs.tag }}
+        run: |
+          VERSION="${TAG_NAME#v}"
+          uv run --project source python source/scripts/update_homebrew_formula.py \
+            --version "$VERSION" \
+            --project-root source \
+            --tap-root . \
+            --formula-path "Formula/${FORMULA}.rb"
+          ruby -c "Formula/${FORMULA}.rb"
+
+      - name: Commit and push
+        env:
+          FORMULA: ${{ inputs.formula }}
+          TAG_NAME: ${{ inputs.tag }}
+        run: |
+          git add "Formula/${FORMULA}.rb"
+          if git diff --cached --quiet -- "Formula/${FORMULA}.rb"; then
+            echo "Formula/${FORMULA}.rb already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "${FORMULA}: update formula for ${TAG_NAME}"
+          git push
