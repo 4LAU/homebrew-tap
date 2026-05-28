@@ -4,25 +4,25 @@ class Apisniff < Formula
   desc "API recon: preflight defenses, traffic capture, and spec extraction"
   homepage "https://github.com/4LAU/apisniff"
   license "MIT"
-  version "0.2.0"
+  version "0.2.1"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/4LAU/apisniff/releases/download/v0.2.0/apisniff_0.2.0_darwin_arm64_v8.0.tar.gz"
-      sha256 "a95363d96f801cb7fe6d65324a5016c77c12097fd09ee58849643fabfaba49e7"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.2.1/apisniff_0.2.1_darwin_arm64.tar.gz"
+      sha256 "0bdda2506eae036f2b78c34fa8973b109a6dbafe0d3fe27f044727ae2429afa3"
     else
-      url "https://github.com/4LAU/apisniff/releases/download/v0.2.0/apisniff_0.2.0_darwin_amd64_v1.tar.gz"
-      sha256 "6a6daae589039e397f1348a46bc03b83a9afc8b1ed9e5f0abd95a373ade4bf37"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.2.1/apisniff_0.2.1_darwin_amd64.tar.gz"
+      sha256 "f6d5fc667c3fec8a9bdf8f74cf89c0ee1417a94a912f973e0a830c1a61a92222"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/4LAU/apisniff/releases/download/v0.2.0/apisniff_0.2.0_linux_arm64_v8.0.tar.gz"
-      sha256 "ae70623707f26316390c859d8fb3f42d8cf9fcf90d92309125aaf1e13b10fa27"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.2.1/apisniff_0.2.1_linux_arm64.tar.gz"
+      sha256 "cf59baff8e2c49c44052dbcc021862d6c027510fb76e00046cb18ddd133c212f"
     else
-      url "https://github.com/4LAU/apisniff/releases/download/v0.2.0/apisniff_0.2.0_linux_amd64_v1.tar.gz"
-      sha256 "4982e17cf86335eb50ee635cde2fe875932fefd4bf6c5f1a70c3427fcdbe882e"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.2.1/apisniff_0.2.1_linux_amd64.tar.gz"
+      sha256 "6b9f72155050c480affd64385e63003dde257ab939278b892dddd39ecd2d9015"
     end
   end
 
