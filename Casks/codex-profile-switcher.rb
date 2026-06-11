@@ -1,6 +1,6 @@
 cask "codex-profile-switcher" do
-  version "0.3.0"
-  sha256 "1fffa7ce54da23f58ae8bc03185da9f659aaed16584eed5ceac7a659761029e9"
+  version "0.4.0"
+  sha256 "fb52043d99ced3880ce98d3980ab8fd972a37b5dd0e9105d781903cd7e0a156d"
 
   url "https://github.com/4LAU/codex-profile-switcher/releases/download/v0.2.1/CodexProfileSwitcher-#{version}.dmg"
   name "Codex Profile Switcher"
