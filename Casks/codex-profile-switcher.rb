@@ -9,6 +9,8 @@ cask "codex-profile-switcher" do
 
   depends_on macos: :sonoma
 
+  auto_updates true
+
   app "CodexProfileSwitcher.app"
   binary "#{appdir}/CodexProfileSwitcher.app/Contents/Helpers/codex-profile"
 
