@@ -5,21 +5,21 @@
 class Apisniff < Formula
   desc "API recon: preflight defenses, traffic capture, and spec extraction"
   homepage "https://github.com/4LAU/apisniff"
-  version "0.12.3"
+  version "0.12.4"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/4LAU/apisniff/releases/download/v0.12.3/apisniff_0.12.3_darwin_amd64.tar.gz"
-      sha256 "e9c77c52da643c25b99d817215b18fb4fd254419943f55955996d736cd2b0753"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.12.4/apisniff_0.12.4_darwin_amd64.tar.gz"
+      sha256 "dbbbb3fc09845bbbbd32dedf35a61f225c235c7e1184e4d7736301d9f416a0de"
 
       define_method(:install) do
         bin.install "apisniff"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/4LAU/apisniff/releases/download/v0.12.3/apisniff_0.12.3_darwin_arm64.tar.gz"
-      sha256 "cbd3a4572ff15b8730cd5a9084d43d9c15cea96dd2f8b5ef1643cecbc1d89911"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.12.4/apisniff_0.12.4_darwin_arm64.tar.gz"
+      sha256 "d5d1fe6bc7a69e9f62ad0fd6f36edbbc13159b2de79087e420b344d970b62728"
 
       define_method(:install) do
         bin.install "apisniff"
@@ -29,15 +29,15 @@ class Apisniff < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/4LAU/apisniff/releases/download/v0.12.3/apisniff_0.12.3_linux_amd64.tar.gz"
-      sha256 "4e0cb44adfd7d86a5a5033c78819fca3fd51ca5e88e3005d273e0cb56a720cde"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.12.4/apisniff_0.12.4_linux_amd64.tar.gz"
+      sha256 "f0f05847adf559c0b3ba14d7a005c37e95f621a345072c0f290b32a0c7868927"
       define_method(:install) do
         bin.install "apisniff"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/4LAU/apisniff/releases/download/v0.12.3/apisniff_0.12.3_linux_arm64.tar.gz"
-      sha256 "15c5c2d6babc8337d6ed073c3d070848bf34a1385337ecc70616d78fb03fe191"
+      url "https://github.com/4LAU/apisniff/releases/download/v0.12.4/apisniff_0.12.4_linux_arm64.tar.gz"
+      sha256 "e20524acdf2be999b4721bd5cd933034a3baf8e1065d8e5f76b36915105a8005"
       define_method(:install) do
         bin.install "apisniff"
       end
