@@ -14,9 +14,11 @@ brew tap 4lau/tap
 
 | Cask | Description |
 |---|---|
+| `apisniff` | Capture browser API traffic and turn it into reusable specifications |
 | `codex-profile-switcher` | Switch OpenAI Codex accounts from the macOS menu bar |
 
 ```bash
+brew install --cask 4lau/tap/apisniff
 brew install --cask 4lau/tap/codex-profile-switcher
 ```
 
